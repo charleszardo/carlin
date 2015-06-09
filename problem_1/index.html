@@ -3,38 +3,24 @@
 
 <head>
     <title>3C Programming Test- Problem 1</title>
-
-    <style>
-    html {
-        width: 100%;
-    }
-    form {
-        
-        width: 100%;
-        
-    }
-    label {
-        text-align: center;
-        width: 100%;
-        display:block;
-    }
-    input {
-        display: block;
-        margin: 0 auto;
-        width: 15em;
-        margin-bottom: 2em;
-    }
-    </style>
+		
+		<link rel="stylesheet" href="cs/bootstrap.min.css"> 
+		
+		<script src="js/shared/angular.min.js"></script>
 </head>
 
+<body ng-app="thirdChannel" ng-controller="mainController">
+	<div class="container">
+		<div class="col-sm-8 col-sm-offset-2">
 
+			<div class="page-header"><h2>Please submit your information!</h2></div>
 
-<h2>Please submit your information!</h2>
+			<form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
 
-<form method="post">
-
-    <label for="firstName">First Name:</label><input name="first_name" id="firstName" value="" placeholder="Enter Your First Name..." type="text"/>
-
+    	<div class="form-group">
+				<label>First Name:</label>
+				<input type="text" name="first_name" class="form-control" id="firstName" ng-model="firstName" placeholder="Enter Your First Name..." required>
+				
     <label for="lastName">Last Name:</label><input name="last_name" id="lastName" value="" placeholder="Enter Your Last Name..." type="text"/>
 
     <label for="phone">Phone:</label><input name="phone" id="phone" value="" placeholder="Phone Number..." type="text"/>
@@ -50,10 +36,16 @@
     <label for="state">State:</label><input name="state" id="state" value="" placeholder="State..." type="text"/>
     <label for="zip">Zip:</label><input name="zip" id="zip" value="" placeholder="Zip..." type="text"/>
 
-    <button type="submit">Submit</button>
-
+    <button type="submit" ng-click="submit(form)" value="Submit">Submit</button>
+		<button type="button" ng-click="reset(form)" value="Reset">Reset</button>
 
 </form>
 
+		<!-- Modules -->
+    <script src="js/app.js"></script>
 
+    <!-- Controllers -->
+    <script src="js/controllers/MainController.js"></script>
+
+</body>
 </html>
