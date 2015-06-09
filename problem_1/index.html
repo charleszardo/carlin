@@ -17,28 +17,28 @@
 
 			<form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
 
-    	<div class="form-group" ng-class="{ 'has-error' : userForm.first_name.$invalid && !userForm.first_name.$pristine }">
+    	<div class="form-group" ng-class="{ 'has-error' : userForm.first_name.$invalid && submitted}">
 				<label>First Name:</label>
-				<input type="text" name="first_name" class="form-control" id="firstName" value="" ng-model="firstName" placeholder="Enter Your First Name..." required>
-				<p ng-show="userForm.first_name.$invalid && !userForm.first_name.$pristine" class="help-block">First name required.</p>
+				<input type="text" name="first_name" class="form-control" id="firstName" value="" ng-model="firstName" ng-pattern="namePattern" placeholder="Enter Your First Name..." required>
+				<p ng-show="userForm.first_name.$invalid && submitted" class="help-block">First name required (no numbers allowed)</p>
 			</div>
 				
-			<div class="form-group" ng-class="{ 'has-error' : userForm.last_name.$invalid && !userForm.last_name.$pristine }">
+			<div class="form-group" ng-class="{ 'has-error' : userForm.last_name.$invalid && submitted }">
 				<label>Last Name:</label>
-				<input type="text" name="last_name" class="form-control" id="lastName" value="" ng-model="lastName" placeholder="Enter Your Last Name..." required>
-				<p ng-show="userForm.last_name.$invalid && !userForm.last_name.$pristine" class="help-block">Last name required.</p>
+				<input type="text" name="last_name" class="form-control" id="lastName" value="" ng-model="lastName" ng-pattern="namePattern" placeholder="Enter Your Last Name..." required>
+				<p ng-show="userForm.last_name.$invalid && submitted" class="help-block">Last name required (no numbers allowed)</p>
 			</div>
 			
-			<div class="form-group" ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">	
+			<div class="form-group" ng-class="{ 'has-error' : userForm.phone.$invalid && submitted }">	
 				<label>Phone:</label>
-				<input type="text" name="phone" class="form-control" id="phone" value="" ng-model="phone" placeholder="Phone Number..." required>
-				<p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">Phone required.</p>
+				<input type="text" name="phone" class="form-control" id="phone" value="" ng-model="phone" ng-pattern="phonePattern" placeholder="Phone Number... (ex: 111-222-3333)" required>
+				<p ng-show="userForm.phone.$invalid && submitted" class="help-block">Enter a properly formatted phone number (ex: 111-222-3333)</p>
 			</div>
 			
-			<div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">	
+			<div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && submitted }">	
 				<label>Email:</label>
 				<input type="email" name="email" class="form-control" id="email" value="" ng-model="email" placeholder="Email address..." required>
-				<p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+				<p ng-show="userForm.email.$invalid && submitted" class="help-block">Enter a valid email</p>
 			</div>
 			
 			<div class="form-group">	
@@ -51,26 +51,28 @@
 				<input type="text" name="street_2" class="form-control" id="street2" value="" ng-model="street2" placeholder="Street 2...">
 			</div>
 			
-			<div class="form-group" ng-class="{ 'has-error' : userForm.city.$invalid && !userForm.city.$pristine }">
+			<div class="form-group" ng-class="{ 'has-error' : userForm.city.$invalid && submitted }">
 				<label>City:</label>
 				<input type="text" name="city" class="form-control" id="city" value="" ng-model="city" placeholder="City..." required>
-				<p ng-show="userForm.city.$invalid && !userForm.city.$pristine" class="help-block">City required.</p>
-			</div>
-				
-			<div class="form-group" ng-class="{ 'has-error' : userForm.state.$invalid && !userForm.state.$pristine }">
-				<label>State:</label>
-				<input type="text" name="state" class="form-control" id="state" value="" ng-model="state" placeholder="State..." required>
-				<p ng-show="userForm.state.$invalid && !userForm.state.$pristine" class="help-block">Enter a valid state.</p>
+				<p ng-show="userForm.city.$invalid && submitted" class="help-block">City required.</p>
 			</div>
 			
-			<div class="form-group" ng-class="{ 'has-error' : userForm.zip.$invalid && !userForm.zip.$pristine }">	
+			<div class="form-group" ng-class="{ 'has-error' : userForm.state.$invalid && submitted }">
+				<label>State:</label>
+				<select name="state" class="form-control" id="state" ng-model="state" ng-options="state.stateValue as state.stateName for state in states" required>
+				<option value="">Select a state</option>
+				</select>
+				<p ng-show="userForm.state.$invalid && submitted" class="help-block">Enter a valid state.</p>
+			</div>
+			
+			<div class="form-group" ng-class="{ 'has-error' : userForm.zip.$invalid && submitted }">	
 				<label>Zip:</label>
-				<input type="text" name="zip" class="form-control" id="zip" value="" ng-model="zip" placeholder="Zip..." ng-pattern="/^(\d{5}-\d{4}|\d{5})$/" required>
-				<p ng-show="userForm.zip.$invalid && !userForm.zip.$pristine" class="help-block">Enter a valid zip.</p>
+				<input type="text" name="zip" class="form-control" id="zip" value="" ng-model="zip" placeholder="Zip..." ng-pattern="zipPattern" required>
+				<p ng-show="userForm.zip.$invalid && submitted" class="help-block">Enter a valid zip.</p>
 			</div>
 
 
-    <button type="submit" class="btn btn-primary" value="Submit" ng-disabled="userForm.$invalid">Submit</button>
+    <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
 
 </form>
 
